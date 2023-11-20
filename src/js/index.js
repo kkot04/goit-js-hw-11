@@ -15,6 +15,7 @@ let page;
 let totalAmountOfPhoto = 0;
 let arrOfPhotos = [];
 
+
 loadMoreBtn.classList.add('is-hidden');
 
 async function getData(userInput, page, perPage) {
