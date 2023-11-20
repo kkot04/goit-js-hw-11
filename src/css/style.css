@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    width: 100%;
+}
+
+form {
+    display: block;
+    background-color: darkblue;
+    padding: 20px 0px 20px 400px;
+    margin: 0 auto;
+}
+
+input {
+    width: 600px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.btn-submit {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.gallery {
+width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.photo-card {
+    width: calc((100% - 80px - 20px) / 5);
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 5px;
+}
+
+.info-item {
+    width: min-content;
+    text-align: center;
+  margin: 0;
+  line-height: 1.5em;
+  color:black;
+}
+
+.load-more {
+  display: block;
+  width: 200px;
+  height: 50px;
+  background-color: darkblue;
+  margin: 0 auto 50px;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+}
+
+.is-hidden {
+visibility: hidden;
+}
