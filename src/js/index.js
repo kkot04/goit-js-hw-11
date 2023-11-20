@@ -3,7 +3,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { createGalleryCards } from './gallery-cards.js';
-import { getPhotos } from './pixabay.js';
+import { getPhotos } from './pixabay';
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
@@ -15,8 +15,7 @@ let page;
 let totalAmountOfPhoto = 0;
 let arrOfPhotos = [];
 
-
-loadMoreBtn.classList.add('is-hidden');
+// loadMoreBtn.classList.add('is-hidden');
 
 async function getData(userInput, page, perPage) {
   try {
@@ -24,12 +23,21 @@ async function getData(userInput, page, perPage) {
     totalAmountOfPhoto = res.totalHits;
     arrOfPhotos = res.hits;
     gallery.insertAdjacentHTML('beforeend', createGalleryCards(arrOfPhotos));
-    var lightbox = new SimpleLightbox('.gallery a', {
+    const lightbox = new SimpleLightbox('.gallery a', {
       captions: true,
       captionPosition: 'bottom',
       captionDelay: 250,
       captionsData: 'alt',
     });
+
+    const last = Math.ceil(res.totalHits / perPage);
+    if (last === page){
+      Notiflix.Notify.info(
+        `It is end`
+      )
+      loadMoreBtn.classList.add('is-hidden')
+    }
+
   } catch (error) {
     console.log(error);
   }
@@ -52,6 +60,8 @@ form.addEventListener('submit', async event => {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
+      gallery.innerHTML = '';
+      loadMoreBtn.classList.add('is-hidden')
     return;
   } 
  if(arrOfPhotos.length < perPage) {
@@ -65,8 +75,6 @@ form.addEventListener('submit', async event => {
 loadMoreBtn.addEventListener('click', async () => {
   page += 1;
   await getData(userInput, page, perPage);
-
-
   if (arrOfPhotos.length < perPage) {
     Notiflix.Notify.info(
       `We're sorry, but you've reached the end of search results.`
